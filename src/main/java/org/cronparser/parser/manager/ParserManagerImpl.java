@@ -4,9 +4,7 @@ import org.cronparser.exception.InvalidCronExpression;
 import org.cronparser.model.CronFieldType;
 import org.cronparser.parser.Parser;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ParserManagerImpl implements ParserManager {
 
@@ -20,12 +18,20 @@ public class ParserManagerImpl implements ParserManager {
     @Override
     public List<Integer> getAllTimings(CronFieldType cronFieldType, String cronExpression) {
         Parser parser;
+        Set<Integer> result = new HashSet<>();
         try {
-            parser = getParser(cronExpression);
+            String []expressions = cronExpression.split(",");
+            for (String expression : expressions) {
+                parser = getParser(expression);
+
+                result.addAll(parser.getTimings(cronFieldType, expression));
+            }
         } catch (InvalidCronExpression e) {
-            throw new InvalidCronExpression(cronFieldType, cronExpression, e.getMessage());
+            throw new InvalidCronExpression(e.getMessage());
         }
-        return parser.getTimings(cronFieldType, cronExpression);
+        List<Integer> timings = new ArrayList<>(result);
+        Collections.sort(timings);
+        return timings;
     }
 
     private Parser getParser(String expression) {

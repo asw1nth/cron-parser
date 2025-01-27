@@ -30,7 +30,7 @@ public class StepValueIntervalParser extends Parser {
         if(isValid(start, increment, cronFieldType)){
             result.addAll(getCronTimings(start, end, increment));
         } else {
-            throw new InvalidCronExpression(cronFieldType, cronExpression, "Values passed are not in give range");
+            throw new InvalidCronExpression(cronFieldType, cronExpression, "Values passed are not in given range");
         }
 
         return result;
@@ -38,7 +38,7 @@ public class StepValueIntervalParser extends Parser {
 
     @Override
     public String getRegex() {
-        return "^\\d+/\\d+$";
+        return "^(\\d+-\\d+|[\\d*]+)\\/\\d+$";
     }
 
     private boolean isValid(Integer startInterval, Integer increment, CronFieldType cronFieldType) {
