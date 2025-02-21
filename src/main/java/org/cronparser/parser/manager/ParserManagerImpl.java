@@ -8,7 +8,7 @@ import java.util.*;
 
 public class ParserManagerImpl implements ParserManager {
 
-    private Set<Parser> parserList = new HashSet<>();
+    private final Set<Parser> parserList = new HashSet<>();
 
     @Override
     public void registerParser(Parser parser) {

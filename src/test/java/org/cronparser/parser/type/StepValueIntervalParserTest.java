@@ -19,8 +19,8 @@ class StepValueIntervalParserTest {
 
     private static Stream<Arguments> dataForParser() {
         return Stream.of(
-                Arguments.of(CronFieldType.MINUTE, "0/15", Arrays.asList(0, 15, 30, 45)),
-                Arguments.of(CronFieldType.HOUR,   "0/12", Arrays.asList(0,12)),
+                Arguments.of(CronFieldType.MINUTE, "0-55/15", Arrays.asList(0,15,30,45)),
+                Arguments.of(CronFieldType.HOUR,   "0-15/6", Arrays.asList(0,6,12)),
                 Arguments.of(CronFieldType.DAY_OF_MONTH, "1/10", Arrays.asList(1,11,21,31)),
                 Arguments.of(CronFieldType.MONTH,"1/2", Arrays.asList(1,3,5,7,9,11)),
                 Arguments.of(CronFieldType.DAY_OF_WEEK, "1/1", Arrays.asList(1,2,3,4,5,6,7))

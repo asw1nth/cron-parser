@@ -78,4 +78,8 @@ public class CronParserResponse {
         }
         return result.toString();
     }
+
+//    private String printWeekList(List<Integer> integers) {
+//        StringBuilder
+//    }
 }

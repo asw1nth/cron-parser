@@ -4,6 +4,20 @@ import java.util.Arrays;
 
 import static org.cronparser.CronParser.computeTimings;
 
+/**
+ * Example : "*\/15 0 1,15 * 1-5 /usr/bin/find"
+ * All of these below are supported
+ * Star, Numbers, Ranges, Multiple numbers & Ranges, Step Intervals, combination of all above, duplicates
+ * Step Intervals - *\/15 , 2/15, 0-55/15
+ * Limitations:
+ * @daily , @weekly, @yearly, Some months have < 31 days, MON-FRI, MON, JAN, JAN-APR, ?, seconds & years,
+ * (1-7)L , (1-7)W, 2#2
+ *
+ *
+ * MON-FRI, MON, JAN, JAN-APR
+ * ***/
+
+
 public class Main {
 
     private static final int EXPRESSION_LENGTH = 6;

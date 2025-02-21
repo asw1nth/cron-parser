@@ -16,15 +16,19 @@ public class StepValueIntervalParser extends Parser {
         }
         String startInterval = interval[0];
         String intervalString = interval[1];
-        int start, end = cronFieldType.getEndRange();
-        if (startInterval.equals("*")) start = 0;
-        else if (startInterval.contains("-")) {
-            String []vals = startInterval.split("-");
-            start = Integer.parseInt(vals[0]);
-            end = Integer.parseInt(vals[1]);
+        int start, increment, end = cronFieldType.getEndRange();
+        try {
+            if (startInterval.equals("*")) start = 0;
+            else if (startInterval.contains("-")) {
+                String[] vals = startInterval.split("-");
+                start = Integer.parseInt(vals[0]);
+                end = Integer.parseInt(vals[1]);
+            } else start = Integer.parseInt(startInterval);
+            increment = Integer.parseInt(intervalString);
+        } catch (Exception e) {
+            throw new InvalidCronExpression(cronFieldType, cronExpression, "Integers or star need to be passed");
         }
-        else start = Integer.parseInt(startInterval);
-        int increment = Integer.parseInt(intervalString);
+
         List<Integer> result = new ArrayList<>(List.of());
 
         if(isValid(start, increment, cronFieldType)){
@@ -38,7 +42,8 @@ public class StepValueIntervalParser extends Parser {
 
     @Override
     public String getRegex() {
-        return "^(\\d+-\\d+|[\\d*]+)\\/\\d+$";
+        return "^(\\d+-\\d+|[\\d]+)\\/\\d+$";
+        // (a-b)/c | a/c | */c
     }
 
     private boolean isValid(Integer startInterval, Integer increment, CronFieldType cronFieldType) {

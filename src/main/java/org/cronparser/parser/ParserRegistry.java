@@ -20,5 +20,8 @@ public class ParserRegistry {
 
         Parser stepValueIntervalParser = new StepValueIntervalParser();
         parserManager.registerParser(stepValueIntervalParser);
+
+        Parser weekNamedParser = new WeekNamedParser();
+        parserManager.registerParser(weekNamedParser);
     }
 }
